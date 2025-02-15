@@ -2,11 +2,18 @@ import React from "react";
 import { FaFileLines } from "react-icons/fa6";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 function Card({ data, reference }) {
   return (
-    <motion.div drag dragConstraints = {reference} className="relative flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-800/90 text-white px-8 py-10 overflow-hidden">
+    <motion.div
+      drag
+      dragConstraints={reference}
+      whileDrag={{ scale: 1.1 }}
+      dragElastic={1.1}
+      dragTransition={{ bounceStiffness: 100, bounceDamping: 30 }}
+      className="relative flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-800/90 text-white px-8 py-10 overflow-hidden"
+    >
       <FaFileLines />
       <p className="mt-5 leading-tight text-sm font-semibold">{data.title}</p>
       <div className="absolute footer bottom-0 w-full  left-0">
@@ -20,11 +27,13 @@ function Card({ data, reference }) {
             )}
           </span>
         </div>
-        {data.tag.isTag && <div className={`tag w-full py-4 ${data.tag.color} flex items-center justify-center `}>
+        {data.tag.isTag && (
+          <div
+            className={`tag w-full py-4 ${data.tag.color} flex items-center justify-center `}
+          >
             <h3 className="font-semibold text-sm">{data.tag.title}</h3>
-          
-        </div>}
-
+          </div>
+        )}
       </div>
     </motion.div>
   );
